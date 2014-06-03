@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class DatabaseManager {
 
-	private AtomicInteger mOpenCounter = new AtomicInteger();
+private AtomicInteger mOpenCounter = new AtomicInteger();
 
 	private static DatabaseManager instance = null;
 
@@ -21,7 +21,7 @@ public class DatabaseManager {
 			throw new Exception("DatabaseHelper is null");
 		}
 		if (dataBaseName == null || "".equals(dataBaseName)) {
-			throw new Exception("dataBaseName isjno value");
+			throw new Exception("dataBaseName is no value");
 		}
 		if (!mDatabaseHelper.getDataBaseName().equals(dataBaseName)) {
 			mDatabaseHelper = new DBhelper(context, dataBaseName, null);
@@ -36,6 +36,13 @@ public class DatabaseManager {
 		return instance;
 	}
 
+	/**
+	 * get DatabaseManager instance
+	 * 
+	 * @param context
+	 * @param dataBaseName
+	 * @return
+	 */
 	public static synchronized DatabaseManager getInstance(Context context,
 			String dataBaseName) {
 		if (instance == null) {
@@ -45,6 +52,9 @@ public class DatabaseManager {
 		return instance;
 	}
 
+	/**
+	 * get a SQLiteDatabase instance,while use
+	 */
 	public synchronized SQLiteDatabase openDatabase() {
 		if (mOpenCounter.incrementAndGet() == 1) {
 			mDatabase = mDatabaseHelper.getWritableDatabase();
@@ -52,11 +62,26 @@ public class DatabaseManager {
 		return mDatabase;
 	}
 
+	/**
+	 * close database，while you don't use
+	 */
 	public synchronized void closeDatabase() {
 		if (mOpenCounter.decrementAndGet() == 0) {
 			if (mDatabase != null) {
 				mDatabase.close();
 			}
 		}
+	}
+
+	/**
+	 * return current DataBase Name, Maybe he is composed of many database..
+	 * 
+	 * @return
+	 */
+	public String getCurrentDataBaseName() {
+		if (mDatabaseHelper != null) {
+			return mDatabaseHelper.getDataBaseName();
+		}
+		return "";
 	}
 }
