@@ -4,7 +4,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-
+/**
+ * database manager,it can support database object
+ * 
+ * @author TC
+ * 
+ * @param <T>
+ */
 public class DatabaseManager {
 
 private AtomicInteger mOpenCounter = new AtomicInteger();
