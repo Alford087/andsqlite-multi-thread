@@ -52,4 +52,5 @@ public class StarDao extends BaseDaoImpl<Star> implements IStar {
 		super.saveObjectByTransaction(context, tableName, dataList);
 	}
 
+
 }

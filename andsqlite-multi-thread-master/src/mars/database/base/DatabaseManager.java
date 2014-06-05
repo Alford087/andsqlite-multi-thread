@@ -69,7 +69,7 @@ private AtomicInteger mOpenCounter = new AtomicInteger();
 	}
 
 	/**
-	 * close database，while you don't use
+	 * close database,while you don't use
 	 */
 	public synchronized void closeDatabase() {
 		if (mOpenCounter.decrementAndGet() == 0) {

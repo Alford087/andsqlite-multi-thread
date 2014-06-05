@@ -10,6 +10,7 @@ public class DBhelper extends SQLiteOpenHelper {
 
 	private Context context;
 	public String dataBaseName = "MOYU.db";
+	
 	public static String baseDataBaseName = "MOYU.db";
 	private final static int VERSION = 1;
 
