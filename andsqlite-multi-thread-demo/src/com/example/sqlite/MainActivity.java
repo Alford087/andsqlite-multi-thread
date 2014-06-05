@@ -3,6 +3,8 @@ package com.example.sqlite;
 import java.util.ArrayList;
 
 import mars.database.base.DatabaseManager;
+import mars.database.bean.Star;
+import mars.database.dao.StarDao;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
