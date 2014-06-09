@@ -1,9 +1,12 @@
 package mars.database.base;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+
 /**
  * database manager,it can support database object
  * 
@@ -13,13 +16,15 @@ import android.database.sqlite.SQLiteDatabase;
  */
 public class DatabaseManager {
 
-private AtomicInteger mOpenCounter = new AtomicInteger();
+	private AtomicInteger mOpenCounter = new AtomicInteger();
 
 	private static DatabaseManager instance = null;
 
 	private static DBhelper mDatabaseHelper = null;
 
 	private SQLiteDatabase mDatabase;
+
+	private static ExecutorService DB_POOL = Executors.newFixedThreadPool(3);
 
 	public synchronized void switchDataBase(Context context, String dataBaseName)
 			throws Exception {
@@ -89,5 +94,14 @@ private AtomicInteger mOpenCounter = new AtomicInteger();
 			return mDatabaseHelper.getDataBaseName();
 		}
 		return "";
+	}
+
+	/**
+	 * execute db operation in pool control;
+	 * 
+	 * @param r
+	 */
+	public void execute(Runnable r) {
+		DB_POOL.execute(r);
 	}
 }
