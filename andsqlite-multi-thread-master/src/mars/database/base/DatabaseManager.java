@@ -28,14 +28,14 @@ public class DatabaseManager {
 
 	public synchronized void switchDataBase(Context context, String dataBaseName)
 			throws Exception {
-		if (mDatabaseHelper == null) {
-			throw new Exception("DatabaseHelper is null");
-		}
 		if (dataBaseName == null || "".equals(dataBaseName)) {
-			throw new Exception("dataBaseName is no value");
+			throw new Exception("dataBaseName is no value,switch is fail !");
 		}
-		if (!mDatabaseHelper.getDataBaseName().equals(dataBaseName)) {
+
+		if (mDatabaseHelper == null
+				|| !mDatabaseHelper.getDataBaseName().equals(dataBaseName)) {
 			mDatabaseHelper = new DBhelper(context, dataBaseName, null);
+			return;
 		}
 	}
 
@@ -102,6 +102,9 @@ public class DatabaseManager {
 	 * @param r
 	 */
 	public void execute(Runnable r) {
+		if (DB_POOL == null || DB_POOL.isShutdown()) {
+			DB_POOL = Executors.newFixedThreadPool(3);
+		}
 		DB_POOL.execute(r);
 	}
 }

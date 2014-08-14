@@ -1,6 +1,7 @@
 package mars.database.base;
 
 import mars.database.dao.StarDao;
+import mars.database.helper.MarsConfig;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
@@ -9,11 +10,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBhelper extends SQLiteOpenHelper {
 
 	private Context context;
-	public String dataBaseName = "MOYU.db";
-	
-	public static String baseDataBaseName = "MOYU.db";
-	private final static int VERSION = 1;
-
+	public String dataBaseName = MarsConfig.DB_NAME;
+	public static String baseDataBaseName = MarsConfig.DB_NAME;
+	private final static int VERSION = MarsConfig.DB_VERSION;
 	// create table sql.eg:
 	private String[] tableSql = { StarDao.getCreateTableSql() };
 	// create index sql.eg:create index key on xxx (TARGET_ID)

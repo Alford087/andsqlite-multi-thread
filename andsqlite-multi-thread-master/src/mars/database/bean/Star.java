@@ -6,7 +6,13 @@ package mars.database.bean;
  * @author TC
  * 
  */
-public class Star {
+public class Star extends BaseBean {
+	private static final long serialVersionUID = 1L;
+	private int id;
+	private int weight;
+	private int radius;
+	private String name;
+
 	public Star() {
 
 	}
@@ -16,11 +22,6 @@ public class Star {
 		this.radius = radius;
 		this.name = name;
 	}
-
-	private int id;
-	private int weight;
-	private int radius;
-	private String name;
 
 	public int getId() {
 		return id;

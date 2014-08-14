@@ -33,9 +33,9 @@ public interface IBaseDao<T> {
 			String[] args);
 
 	/* query */
-	public ArrayList<T> getPagingBySqlQuery(Context context,String table, String[] columns,
-			String selection, String[] selectionArgs, String groupBy,
-			String having, String orderBy);
+	public ArrayList<T> getPagingBySqlQuery(Context context, String table,
+			String[] columns, String selection, String[] selectionArgs,
+			String groupBy, String having, String orderBy);
 
 	/* account data */
 	public int findCountSql(Context context, String sql, String[] args);
